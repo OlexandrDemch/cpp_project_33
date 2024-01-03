@@ -1,0 +1,134 @@
+#include <iostream>
+#include <string>
+
+class Overcoat {
+private:
+    std::string type;
+    double price;
+
+public:
+    Overcoat(const std::string& t = "", double p = 0.0) : type(t), price(p) {}
+
+    bool operator==(const Overcoat& other) const {
+        return type == other.type && price == other.price;
+    }
+
+    Overcoat& operator=(const Overcoat& other) {
+        if (this != &other) {
+            type = other.type;
+            price = other.price;
+        }
+        return *this;
+    }
+
+    bool operator>(const Overcoat& other) const {
+        return price > other.price;
+    }
+
+    void setType(const std::string& t) { type = t; }
+    void setPrice(double p) { price = p; }
+
+    const std::string& getType() const { return type; }
+    double getPrice() const { return price; }
+};
+
+void displayOvercoatInfo(const Overcoat& overcoat) {
+    std::cout << "Overcoat: Type = " << overcoat.getType() << ", Price = " << overcoat.getPrice() << "\n";
+}
+
+class Flat {
+private:
+    double area;
+    double price;
+
+public:
+    Flat(double a = 0.0, double p = 0.0) : area(a), price(p) {}
+
+    bool operator==(const Flat& other) const {
+        return area == other.area;
+    }
+
+    Flat& operator=(const Flat& other) {
+        if (this != &other) {
+            area = other.area;
+            price = other.price;
+        }
+        return *this;
+    }
+
+    bool operator>(const Flat& other) const {
+        return price > other.price;
+    }
+
+    void setArea(double a) { area = a; }
+    void setPrice(double p) { price = p; }
+
+    double getArea() const { return area; }
+    double getPrice() const { return price; }
+};
+
+void displayFlatInfo(const Flat& flat) {
+    std::cout << "Flat: Area = " << flat.getArea() << ", Price = " << flat.getPrice() << "\n";
+}
+
+int main() {
+    Overcoat coat1("Winter Coat", 120.0);
+    Overcoat coat2("Spring Jacket", 80.0);
+    Overcoat coat3("Winter Coat", 120.0);
+
+    if (coat1 == coat2) {
+        std::cout << "Coat 1 is the same as Coat 2.\n";
+    }
+    else {
+        std::cout << "Coat 1 is not the same as Coat 2.\n";
+    }
+
+    if (coat1 == coat3) {
+        std::cout << "Coat 1 is the same as Coat 3.\n";
+    }
+    else {
+        std::cout << "Coat 1 is not the same as Coat 3.\n";
+    }
+
+    coat1 = coat2;
+    std::cout << "Coat 1 after assignment: ";
+    displayOvercoatInfo(coat1);
+
+    if (coat1 > coat3) {
+        std::cout << "Coat 1 is more expensive than Coat 3.\n";
+    }
+    else {
+        std::cout << "Coat 1 is not more expensive than Coat 3.\n";
+    }
+
+    Flat flat1(80.0, 150000.0);
+    Flat flat2(100.0, 200000.0);
+    Flat flat3(80.0, 180000.0);
+
+    if (flat1 == flat2) {
+        std::cout << "Flat 1 has the same area as Flat 2.\n";
+    }
+    else {
+        std::cout << "Flat 1 does not have the same area as Flat 2.\n";
+    }
+
+    if (flat1 == flat3) {
+        std::cout << "Flat 1 has the same area as Flat 3.\n";
+    }
+    else {
+        std::cout << "Flat 1 does not have the same area as Flat 3.\n";
+    }
+
+    flat1 = flat2;
+    std::cout << "Flat 1 after assignment: ";
+    displayFlatInfo(flat1);
+
+    if (flat1 > flat3) {
+        std::cout << "Flat 1 is more expensive than Flat 3.\n";
+    }
+    else {
+        std::cout << "Flat 1 is not more expensive than Flat 3.\n";
+    }
+
+    return 0;
+}
